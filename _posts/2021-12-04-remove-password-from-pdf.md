@@ -2,7 +2,6 @@
 layout: post
 title:  "How to remove password from pdf file*"
 date:   2021-12-02 09:01:26 +0100
-categories: it-general
 ---
 
 #### * given you have the password
