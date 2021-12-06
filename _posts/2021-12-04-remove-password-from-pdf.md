@@ -8,12 +8,22 @@ date:   2021-12-02 09:01:26 +0100
 
 ## Intro
 
-Sometimes we get a password-protected PDF file. We know the password, it's just inconvenient to always enter it when you want to open it.
+Sometimes we get a password-protected PDF file. We know the password, it's just inconvenient to always enter it when you want to open it, so we may want to remove the password protection.
 
-Let's see how you can remove the password using a command-line tool, [**QPDF**](https://qpdf.sourceforge.io/).  
+## The easy way
+
+**Your favorite PDF viewer (or editor) may be able to remove the password**, so if you only need to decrypt only one pdf, start there!  
+> If you need a recommendation on a PDF viewer, I recommend PDF-XChange Viewer, it's fast and free.  
+> If you want to do that using PDF-XChange Viewer then you can do it by: (Open pdf), File -> Document Properties -> Security (category) -> change Security Method to "No Security" -> OK -> Close dialog -> Save file
+
+However, if you need to decrypt many files at once, keep reading.
+
+## The automated way - QPDF
+
+You can remove password using a command-line tool, [**QPDF**](https://qpdf.sourceforge.io/).  
 Don't worry, **no install is required**.
 
-_Note_: We will use Windows 10, but AFAIK QPDF is available on other systems too.
+_Note_: We will use Windows 10, but QPDF should be available on other systems too.
 
 ## Get QPDF
 
