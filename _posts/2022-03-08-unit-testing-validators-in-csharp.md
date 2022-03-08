@@ -36,12 +36,12 @@ support most means of validation, let it be a framework or your custom solution.
 
 This is the validation logic for our model object:
 
-**CreateCustomerRequestFluentValidator**
+**CreateCustomerRequestValidator**
 ```cs
-public class CreateCustomerRequestFluentValidator
+public class CreateCustomerRequestValidator
     : AbstractValidator<CreateCustomerRequest>
 {
-    public CreateCustomerRequestFluentValidator()
+    public CreateCustomerRequestValidator()
     {
         RuleFor(x => x.Name)
             .NotEmpty();
@@ -57,7 +57,7 @@ public class CreateCustomerRequestFluentValidator
 The usual way we would write unit tests is to do something like 
 [this](https://gitlab.com/demo-repositories/blog/unittestingvalidators/-/commit/94bb7a6b484276abdbce5ef951ca5e09dae30629):
 
-**CreateCustomerRequestFluentValidatorTests**
+**CreateCustomerRequestValidatorTests**
 ```cs
 [Theory]
 [InlineData(null)]
@@ -71,7 +71,7 @@ public void Name_cannot_be_empty(string name)
         Name = name,
         Age = 32,
     };
-    var validator = new CreateCustomerRequestFluentValidator();
+    var validator = new CreateCustomerRequestValidator();
 
     // Act
     TestValidationResult<CreateCustomerRequest> result = 
@@ -144,9 +144,9 @@ And this is how we use it in our test class:
 - call the base class' `Validate` method
 - check the validation result
 
-**CreateCustomerRequestFluentValidatorTests**
+**CreateCustomerRequestValidatorTests**
 ```cs
-public class CreateCustomerRequestFluentValidatorTests
+public class CreateCustomerRequestValidatorTests
         : ValidatorTestBase<CreateCustomerRequest>
 {
     [Theory]
@@ -176,7 +176,7 @@ public class CreateCustomerRequestFluentValidatorTests
 
     protected override IValidator<CreateCustomerRequest> CreateValidator()
     {
-        return new CreateCustomerRequestFluentValidator();
+        return new CreateCustomerRequestValidator();
     }
 }
 ```
