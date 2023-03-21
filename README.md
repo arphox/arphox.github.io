@@ -1,2 +1,2 @@
 # arphox.github.io
-My blog
+My blog!
