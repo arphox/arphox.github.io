@@ -16,9 +16,9 @@ permalink: /cv/
 
   #cv-toolbar {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid #e8e8e8;
@@ -33,18 +33,23 @@ permalink: /cv/
     color: #fff;
   }
   #cv-toolbar button:hover { background: #1756a9; border-color: #1756a9; }
-  #cv-toolbar a { align-self: center; }
+  .cv-print-hint { margin: 0; color: #595959; font-size: 0.9em; line-height: 1.5; }
 
   .cv-content { line-height: 1.6; }
   .cv-status { color: #828282; font-style: italic; }
   .cv-error { color: #a00; }
+
+  .cv-footer-sep { margin-top: 2.5rem; border: 0; border-top: 1px solid #e8e8e8; }
+  .cv-source { color: #828282; font-size: 0.9em; }
 
   /* Print / Save-as-PDF: strip everything except the CV itself */
   @media print {
     @page { margin: 1.5cm; }
     .site-header,
     .site-footer,
-    #cv-toolbar { display: none !important; }
+    #cv-toolbar,
+    .cv-footer-sep,
+    .cv-source { display: none !important; }
     .page-content { padding: 0 !important; }
     .wrapper { max-width: none !important; margin: 0 !important; padding: 0 !important; }
     .cv-content { line-height: 1.45; font-size: 10.5pt; }
@@ -54,13 +59,22 @@ permalink: /cv/
 </style>
 
 <div id="cv-toolbar">
-  <button type="button" id="cv-print">🖨️ Print / Save as PDF</button>
-  <a href="https://gitlab.com/arphox/cv/-/blob/master/README.md" target="_blank" rel="noopener">View source on GitLab ↗</a>
+  <button type="button" id="cv-print">🖨️ Save as PDF</button>
+  <p class="cv-print-hint">
+    Need a PDF? Click the button, then choose <strong>“Save as PDF”</strong> as the
+    destination in your browser’s print dialog.
+  </p>
 </div>
 
 <article id="cv-content" class="cv-content" aria-live="polite" aria-busy="true">
   <p class="cv-status">Loading CV from GitLab…</p>
 </article>
+
+<hr class="cv-footer-sep">
+<p class="cv-source">
+  This CV is rendered live from its Markdown source —
+  <a href="https://gitlab.com/arphox/cv/-/blob/master/README.md" target="_blank" rel="noopener">view the source on GitLab ↗</a>.
+</p>
 
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/marked/16.3.0/lib/marked.umd.min.js"
