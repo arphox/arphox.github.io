@@ -48,11 +48,12 @@ permalink: /cv/
     .page-content { padding: 0 !important; }
     .wrapper { max-width: none !important; margin: 0 !important; padding: 0 !important; }
     .cv-content { line-height: 1.45; font-size: 10.5pt; }
-    a { color: #000; text-decoration: none; }
+    /* Keep links identifiable on paper; they also stay clickable in Save-as-PDF */
+    .cv-content a { color: #000; text-decoration: underline; }
   }
 </style>
 
-<div id="cv-toolbar" class="no-print">
+<div id="cv-toolbar">
   <button type="button" id="cv-print">🖨️ Print / Save as PDF</button>
   <a href="https://gitlab.com/arphox/cv/-/blob/master/README.md" target="_blank" rel="noopener">View source on GitLab ↗</a>
 </div>
@@ -76,13 +77,25 @@ permalink: /cv/
     // CORS-enabled GitLab API endpoint (the /-/raw/ path does NOT send CORS headers)
     var SOURCE = 'https://gitlab.com/api/v4/projects/arphox%2Fcv/repository/files/README.md/raw?ref=master';
     var GITLAB_UI = 'https://gitlab.com/arphox/cv/-/blob/master/README.md';
+    var TIMEOUT_MS = 15000;
     var content = document.getElementById('cv-content');
+
+    // Wire the print button unconditionally, before any early return below.
+    document.getElementById('cv-print').addEventListener('click', function () {
+      window.print();
+    });
 
     function fail(message) {
       content.setAttribute('aria-busy', 'false');
-      content.innerHTML =
-        '<p class="cv-error">Couldn\'t load the CV dynamically (' + message + ').</p>' +
-        '<p>You can read it directly on <a href="' + GITLAB_UI + '">GitLab</a>.</p>';
+      content.textContent = '';
+      var p1 = document.createElement('p');
+      p1.className = 'cv-error';
+      p1.textContent = 'Couldn\'t load the CV dynamically (' + message + ').';
+      var p2 = document.createElement('p');
+      // GITLAB_UI is a trusted constant; the dynamic `message` above is set via textContent.
+      p2.innerHTML = 'You can read it directly on <a href="' + GITLAB_UI + '">GitLab</a>.';
+      content.appendChild(p1);
+      content.appendChild(p2);
     }
 
     if (typeof marked === 'undefined' || typeof DOMPurify === 'undefined') {
@@ -90,7 +103,10 @@ permalink: /cv/
       return;
     }
 
-    fetch(SOURCE, { cache: 'no-store' })
+    var controller = new AbortController();
+    var timer = setTimeout(function () { controller.abort(); }, TIMEOUT_MS);
+
+    fetch(SOURCE, { cache: 'no-store', signal: controller.signal })
       .then(function (res) {
         if (!res.ok) { throw new Error('HTTP ' + res.status); }
         return res.text();
@@ -102,11 +118,8 @@ permalink: /cv/
         document.title = 'CV — Károly Ozsvárt';
       })
       .catch(function (err) {
-        fail(String((err && err.message) || err));
-      });
-
-    document.getElementById('cv-print').addEventListener('click', function () {
-      window.print();
-    });
+        fail((err && err.name === 'AbortError') ? 'timed out' : String((err && err.message) || err));
+      })
+      .then(function () { clearTimeout(timer); });
   })();
 </script>
