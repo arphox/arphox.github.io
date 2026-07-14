@@ -1,0 +1,112 @@
+---
+layout: page
+title: CV
+permalink: /cv/
+---
+
+{%- comment -%}
+  This page renders my CV dynamically in the browser by fetching the Markdown
+  source straight from GitLab (nothing is copied into this repo). See /README
+  or the commit history for details.
+{%- endcomment -%}
+
+<style>
+  /* Hide the duplicate "CV" page title — the CV markdown has its own name heading */
+  .post-header { display: none; }
+
+  #cv-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  #cv-toolbar button {
+    font: inherit;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border: 1px solid #2a7ae2;
+    border-radius: 5px;
+    background: #2a7ae2;
+    color: #fff;
+  }
+  #cv-toolbar button:hover { background: #1756a9; border-color: #1756a9; }
+  #cv-toolbar a { align-self: center; }
+
+  .cv-content { line-height: 1.6; }
+  .cv-status { color: #828282; font-style: italic; }
+  .cv-error { color: #a00; }
+
+  /* Print / Save-as-PDF: strip everything except the CV itself */
+  @media print {
+    @page { margin: 1.5cm; }
+    .site-header,
+    .site-footer,
+    #cv-toolbar { display: none !important; }
+    .page-content { padding: 0 !important; }
+    .wrapper { max-width: none !important; margin: 0 !important; padding: 0 !important; }
+    .cv-content { line-height: 1.45; font-size: 10.5pt; }
+    a { color: #000; text-decoration: none; }
+  }
+</style>
+
+<div id="cv-toolbar" class="no-print">
+  <button type="button" id="cv-print">🖨️ Print / Save as PDF</button>
+  <a href="https://gitlab.com/arphox/cv/-/blob/master/README.md" target="_blank" rel="noopener">View source on GitLab ↗</a>
+</div>
+
+<article id="cv-content" class="cv-content" aria-live="polite" aria-busy="true">
+  <p class="cv-status">Loading CV from GitLab…</p>
+</article>
+
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/marked/16.3.0/lib/marked.umd.min.js"
+  integrity="sha512-V6rGY7jjOEUc7q5Ews8mMlretz1Vn2wLdMW/qgABLWunzsLfluM0FwHuGjGQ1lc8jO5vGpGIGFE+rTzB+63HdA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.4.8/purify.min.js"
+  integrity="sha512-JfRHuuInas3e80YgJBTb6JfrK4ngt4FRR9utxm7RbiuRVRNBdPORorA/WTgRKFCK7nbo+9ANMcEOVznsYvi3+A=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"></script>
+<script>
+  (function () {
+    // CORS-enabled GitLab API endpoint (the /-/raw/ path does NOT send CORS headers)
+    var SOURCE = 'https://gitlab.com/api/v4/projects/arphox%2Fcv/repository/files/README.md/raw?ref=master';
+    var GITLAB_UI = 'https://gitlab.com/arphox/cv/-/blob/master/README.md';
+    var content = document.getElementById('cv-content');
+
+    function fail(message) {
+      content.setAttribute('aria-busy', 'false');
+      content.innerHTML =
+        '<p class="cv-error">Couldn\'t load the CV dynamically (' + message + ').</p>' +
+        '<p>You can read it directly on <a href="' + GITLAB_UI + '">GitLab</a>.</p>';
+    }
+
+    if (typeof marked === 'undefined' || typeof DOMPurify === 'undefined') {
+      fail('required libraries failed to load');
+      return;
+    }
+
+    fetch(SOURCE, { cache: 'no-store' })
+      .then(function (res) {
+        if (!res.ok) { throw new Error('HTTP ' + res.status); }
+        return res.text();
+      })
+      .then(function (markdown) {
+        var dirty = marked.parse(markdown, { gfm: true });
+        content.innerHTML = DOMPurify.sanitize(dirty, { USE_PROFILES: { html: true } });
+        content.setAttribute('aria-busy', 'false');
+        document.title = 'CV — Károly Ozsvárt';
+      })
+      .catch(function (err) {
+        fail(String((err && err.message) || err));
+      });
+
+    document.getElementById('cv-print').addEventListener('click', function () {
+      window.print();
+    });
+  })();
+</script>

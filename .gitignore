@@ -3,3 +3,6 @@ _site
 .jekyll-cache
 .jekyll-metadata
 vendor
+# Not committed: local builds use bleeding-edge Ruby (Win) while CI uses Ruby 3.4 (Linux);
+# CI resolves gems fresh via bundler-cache, so a machine-specific lock would only cause friction.
+Gemfile.lock
