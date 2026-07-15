@@ -2,7 +2,7 @@
 > A quality-oriented software engineer
 
 **Location:** Budapest, Hungary  
-**Links:** [LinkedIn](https://www.linkedin.com/in/arphox/), [GitHub](https://github.com/arphox), [GitLab](https://gitlab.com/arphox), [YouTube](https://www.youtube.com/@ozsvartkaroly), [Stackoverflow](https://stackoverflow.com/users/4215389), [Facebook](https://www.facebook.com/ozsvart.karoly/)
+**Links:** [CV (online)](https://arphox.github.io/cv/), [LinkedIn](https://www.linkedin.com/in/arphox/), [GitHub](https://github.com/arphox), [GitLab](https://gitlab.com/arphox), [YouTube](https://www.youtube.com/@ozsvartkaroly), [Stackoverflow](https://stackoverflow.com/users/4215389), [Facebook](https://www.facebook.com/ozsvart.karoly/)
 
 ---
 
