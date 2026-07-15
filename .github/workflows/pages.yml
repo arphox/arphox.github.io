@@ -51,15 +51,23 @@ jobs:
             exit 1
           fi
           "$CHROME" --version
-          # Serve the built site so root-absolute asset URLs (/assets/main.css, …) resolve.
-          ruby -run -e httpd -- _site -p 4000 &>/dev/null &
+          # Serve the built site so root-absolute asset URLs (/assets/main.css, …)
+          # resolve. Use python3 (preinstalled) — not `ruby -run -e httpd`, whose
+          # WEBrick was dropped from Ruby's stdlib in 3.0 and isn't on PATH here.
+          python3 -m http.server 4000 --bind 127.0.0.1 --directory _site &>/dev/null &
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
-          # Wait for the server to answer on /cv/.
-          for i in $(seq 1 30); do
-            if curl -sSf -o /dev/null "http://127.0.0.1:4000/cv/"; then break; fi
+          # Wait for the server to answer on /cv/; fail loudly if it never does
+          # (otherwise Chrome would print an error page into the PDF).
+          READY=0
+          for i in $(seq 1 40); do
+            if curl -sSf -o /dev/null "http://127.0.0.1:4000/cv/"; then READY=1; break; fi
             sleep 0.5
           done
+          if [ "$READY" -ne 1 ]; then
+            echo "::error::Local server did not come up on port 4000." >&2
+            exit 1
+          fi
           "$CHROME" \
             --headless=new \
             --disable-gpu \
