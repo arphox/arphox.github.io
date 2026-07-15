@@ -1,114 +1,84 @@
 # Károly Ozsvárt
-> A quality-oriented software engineer
+> Staff Software Engineer · C# .NET Backend · AWS & Azure · Maintainability-first
 
 **Location:** Budapest, Hungary  
-**Links:** [CV (online)](https://arphox.github.io/cv/), [LinkedIn](https://www.linkedin.com/in/arphox/), [GitHub](https://github.com/arphox), [GitLab](https://gitlab.com/arphox), [YouTube](https://www.youtube.com/@ozsvartkaroly), [Stackoverflow](https://stackoverflow.com/users/4215389), [Facebook](https://www.facebook.com/ozsvart.karoly/)
+**Contact:** [karoly-ozsvart.static115@simplelogin.com](mailto:karoly-ozsvart.static115@simplelogin.com)  
+**Links:** [Online CV](https://arphox.github.io/cv/) · [LinkedIn](https://www.linkedin.com/in/arphox/) · [GitHub](https://github.com/arphox) · [GitLab](https://gitlab.com/arphox) · [YouTube](https://www.youtube.com/@ozsvartkaroly) · [Stack Overflow](https://stackoverflow.com/users/4215389)
 
 ---
 
-**I am a proactive, precise and efficiency-oriented C# software engineer who loves maintainability**, working in the software industry **since 2017**.
+## Summary
 
-### 1. Job titles I'm interested at:
-- Staff Engineer (with backend .NET focus)
-- C# .NET Software Engineer / Backend Developer
+C# / .NET backend engineer since 2017, currently **Staff Engineer / Team Architect** on an AI-enhanced, video-based e-learning platform. I design and build backend services and Web APIs — currently on AWS, earlier on Azure — and what I care about most is **maintainability**: clean code, solid tests, and an architecture that stays easy to change as teams and traffic grow. I set technical direction across teams, mentor engineers and share knowledge, and keep technical debt under control. I lean on automation to keep quality high by default, and work transparently — giving and inviting feedback openly.
 
-### 2. Hard skills
-I write clean code and apply my deep knowledge in C# .NET development.  
-I have experience developing **Web API**s in .NET.
+## Core skills
 
-I know:
-- **AI tools**: Claude Code, Cursor
-- **developer tools**: Rider, Notepad++, Visual Studio, ReSharper, dotTrace, dotMemory, Postman, BenchmarkDotNet, etc.
-- **test frameworks**: xUnit, TUnit, NUnit, MsTest (+ Moq/NSubstitute, FluentAssertions)
-- **source control**: Git (via [Fork](https://fork.dev/)), TFS
-- **persistence and platforms**: DynamoDB, S3, CosmosDb, MSSQL (+EF), some Kafka and Redis
-- **devops basics**: CI/CD pipelines, docker, kubernetes
-- **principles**: SOLID, DRY, KISS, YAGNI, etc.
-- **design patterns**: DI, factory, builder, adapter, template method, strategy, etc
-- **Azure** and **AWS**
+- **Languages & runtime:** C# (since 2017), modern .NET (through .NET 10), .NET Framework
+- **Backend:** ASP.NET Core Web API, REST, distributed & event-driven systems, microservices
+- **Cloud:** AWS (Lambda, ECS/Fargate), Azure (App Service, Functions)
+- **DevOps:** basics of CI/CD, Docker, Terraform
+- **Data & storage:** NoSQL-first: DynamoDB (current), Cosmos DB (prior); object storage (S3, Blob); SQS. Earlier MSSQL (+ EF)
+- **Testing & quality:** xUnit / TUnit / NUnit / MSTest, Moq / NSubstitute, FluentAssertions, BenchmarkDotNet, Roslyn analyzers
+- **Ways of working:** maintainability, automated quality checking, clean code, SOLID, TDD, code review, technical leadership, mentoring & knowledge-sharing
+- **AI-assisted development:** daily driver — Claude Code, Cursor, GitHub Copilot
+- **Tooling:** Rider, Visual Studio, Git, Postman, dotTrace / dotMemory
 
-I have minor experience with: WCF, WPF, WinForms, Hangfire, and event sourcing.
+## Experience
 
-### 3. Personal traits
+### Nexius Learning (now Bitwit) — Budapest, Hungary
+_AI-enhanced, video-based e-learning platform · C# .NET microservices_
 
-**I am**:
-- analytic
-- system-thinking
-- honest and outspoken ("candid")
-- competitive
+**Staff Engineer (.NET)** · 2024-08 – Present
+- Provide technical leadership for the platform backend on a microservices architecture (AWS: Lambda, ECS/Fargate, DynamoDB, S3; Terraform; C# .NET) — architectural guidance, mentoring, and hands-on delivery.
+- From 2025-03 to 2026-06, also led the backend-heavy **platform team** (4 engineers) as **Technical Lead / Team Architect**, owning the long-term maintainability, stability and scalability of ~30 backend services — until the backend sub-teams merged back into a single team.
+- Set the team's quality bar with a build-enforced baseline (analyzers, warnings-as-errors, formatting, Git hooks) so violations are caught mechanically and code review can focus on design — keeping technical debt in check as the team grows.
+- Drive engineering culture beyond my own team: **founded and run** an internal engineering **book club** (since 2024-08, 4+ books) and **organize a company-wide backend guild** (since 2023-12) that aligns backend practices across teams.
+- Contributed to cost-optimization work that cut the platform's AWS bill by ~$3,000/month.
 
-**I strive to**:
-- understand things, to pay attention to detail
-- make things (code, architecture, processes, etc.) better
-- be transparent
-- continuously improve myself
-- share my knowledge and expertise
-- give and receive feedback
+**Tech Lead / Team Architect** · 2023-05 – 2024-08
+- Owned the technical direction of the module: supported the product owner with prioritization and estimation, coordinated tasks across the team, and managed technical debt.
+- Authored the company-wide **Git standards** largely single-handedly — a thorough, high-quality guideline that raised engineering consistency across teams.
+- Designed the backend foundation of the platform's new content-publication model, then refined it with a partner team.
+- Helped drive the team's adoption of AI-assisted development (GitHub Copilot and others) — wrote guidance and supported colleagues in integrating it into their workflow.
 
-**I love the topics of**:
-- maintainability
-- automation
-- code quality
-- performance and efficiency
+**Senior C# Backend Developer** · 2022-01 – 2023-05
+- Built Web APIs on **.NET 6 / C# 9** in an Azure cloud-first architecture (Cosmos DB, App Service, Azure Functions, Blob Storage), serving learning content and automated test assessment to learners on the platform.
 
-**I don't like**:
-- monotonous work that does not require creativity and/or can be automated
-- working with unmotivated or toxic coworkers
-- dealing with corporate bureaucracy
+_Employed through VividMind Zrt. until 2024-01._
 
-### 4. Experience
+### Betsson Group — Senior C# Backend Developer · 2021-04 – 2022-01
+- Delivered features in the C# .NET backend (Framework 4.7.x and Core 3.1) powering betsson.com and other brands.
+- Worked in a multinational, cross-located team; adopted Couchbase, Consul, TeamCity and Octopus.
 
-#### 2024.08 – _present_: Staff Engineer (.NET) at [Nexius Learning](https://nexiuslearning.com/)
-I provide technical leadership to a team building an AI-enhanced, video-based e-learning platform. The product uses a microservices architecture on AWS, with Terraform and C# .NET. My role includes architectural guidance, mentoring, and hands-on problem-solving to deliver impactful learning solutions.  
-Since 2025.03, I have also been serving as Technical Lead / Team Architect for a new, smaller, backend-heavy subteam within the same product, focusing on long-term maintainability, stability and scalability.
+### Grape Solutions — C# Backend Developer · 2019-07 – 2021-04
+- **2020-07 – 2021-04:** Developed an internal product in a microservices architecture (ASP.NET Core 3.1, C# 8, Kafka, MongoDB, Elasticsearch, Redis); owned and maintained an internal NuGet package.
+- **2019-07 – 2020-07:** Built core backend Web APIs for **WizzAir.com** (.NET Framework, SQL, EF) in a service-oriented architecture.
 
-#### 2023.05 – 2024.08: Tech Lead (.NET) at [Nexius Learning](https://nexiuslearning.com/)
-Same module as previously mentioned, but in a different role with different challenges (the role was actually called Team Architect).  
-Responsible for the technical aspect of the module, assisted the product owner in issue prioritization and estimation, coordinated tasks, managed technical debts, coordinated with other teams on technical issues related to the owned module.  
-_Note: worked there through [VividMind Zrt.](https://vividmindsoft.com) until 2024.01_
+### evosoft — C# Backend Developer · 2018-04 – 2019-07
+- Developed an internal component of a massive industrial-automation desktop application: TIA Portal — one of the largest C# codebases in the world.
+- Sharpened software design and C# performance skills; worked in Scrum with TFS.
 
-#### 2022.01 – 2023.05: Senior C# Backend Developer at [Nexius Learning](https://nexiuslearning.com/)
-Worked on the backend of a module of the Nexius E-learning system. The module is responsible for serving learning content to students and testing their knowledge through automated test assessment.  
-Developed HTTP APIs using .NET 6/C# 9.  
-Experienced an Azure cloud-first architecture. I learned the basics of Azure, deepened into CosmosDb, worked with App Services, Azure Functions and Blob Storage.  
-_Note: worked there through [VividMind Zrt.](https://vividmindsoft.com)_
+### DGITAL Labs — Junior C# Backend Developer · 2017-06 – 2018-04
+- Built the backend of a flight-industry website (ASP.NET Web API, C#, Oracle/MSSQL, EF, Elasticsearch, Redis, Hangfire); first exposure to Swagger and CI/CD pipelines.
 
-#### 2021.04 – 2022.01: Senior C# Backend Developer at [Betsson Group](https://www.betssongroup.com/)
-Worked on the backend software system which served betsson.com and other similar brands.
-I developed HTTP APIs using C# .NET (mostly framework 4.7.x and Core 3.1) to implement features.
-Met some new technologies & tools, notably: Couchbase, Consul, TeamCity, Octopus.
-I experienced what it is like to work in a multinational cross-located team, and improved my English as well as my communication skills.
+### Athéné Szakgimnázium — Programming Teacher (C# & theory) · 2015-12 – 2017-05
+- Taught programming to ~60 students; built an application for submitting test solutions over the school network.
 
-#### 2019.07 – 2021.04: C# Backend Developer at [Grape Solutions](https://grape.hu/hu/)  
-2020.07 – 2021.04: Worked on an internal product of the company. I developed in a microservices architecture, learned Kafka, worked with ASP.NET Core 3.1 Web API, C# 8, MongoDB, Elasticsearch and Redis. I also wrote, maintained and was responsible for an internal NuGet package.
+## Selected achievements
 
-2019.07 – 2020.07: Worked on the core backend systems of WizzAir.com, developing ASP.NET Web APIs in C# (.NET framework), using SQL and Entity Framework. I developed in an architecture similar to service oriented architectures.
+- **Conference speaker** — "C#-based Git hooks" at [BeerUP Tech Fest 2024](https://www.youtube.com/watch?v=wfpaFQ7iZCs) (recorded), on an in-house C# Git-hook framework I architected and co-built.
+- **Pro Git contributor** — got a pull request merged into the official [Pro Git](https://git-scm.com/book) book.
+- **Competition winner** — 15+ professional programming competitions, [several wins](https://itmap.hu/harom-versenyzo-harom-gyoztes-harom-ujraindulo/).
+- **Content creator** — [Hungarian C# tutorial series](https://www.youtube.com/@ozsvartkaroly) on YouTube.
+- **Open source** — most of my personal code is public: [see it all](https://gitlab.com/users/arphox/groups).
 
-#### 2018.04 – 2019.07: C# Developer at [evosoft](https://www.evosoft.hu/)
-Worked on a huge desktop application's internal component (GUI development not included). The application supported industrial automation, and was one of the largest C# code bases in the world.  
-I learned Scrum and TFS, and improved my software design and C# performance skills.
+## Education
 
-#### 2017.06 – 2018.04: Junior C# Backend Developer at [DGITAL](https://www.dgital.com/)
-Worked on a backend of a (flight industry) website in ASP.NET Web API, C#, using Oracle/Microsoft SQL, Entity Framework, Elasticsearch, Redis and Hangfire. I also met Swagger and experienced CI/CD pipelines.  
-I learned the fundamentals of professional software development.
+- **BSc in Engineering of Information Technology** (mérnökinformatikus), **Óbuda University** — specialization in enterprise information systems.
+- **English** — B2 certified; ~B2–C1 in speech and writing.
+- **Networking coursework** — Cisco CCNA, MTA Networking Fundamentals.
+- **Conferences & courses** — Craft conference attendee (2019, 2024, 2025); regular technical courses and professional reading.
 
-#### 2015.12 – 2017.05: Programming Teacher (theory and C# practice) at Athéné Szakgimnázium
-I taught mainly programming practice (and some theory) to around 60 students.  
-Meanwhile, I developed an application to help students hand in their test solutions through the school's network.
+## Interests
 
-#### Until 2017
-I graduated as a **BSc in Engineering of Information Technology (mérnökinformatikus)** at **Óbuda University**, specializing in enterprise information systems.
-
-### 5. Achievements
-Some things I'm proud of:
-- I attended several (15+) professional competitions so far, and [won](https://itmap.hu/harom-versenyzo-harom-gyoztes-harom-ujraindulo/) some
-- I gave a talk on C#-based Git hooks at [BeerUP Tech Fest 2024](https://www.linkedin.com/posts/hellomndwrk_beeruptechfest-beerup-itfest-activity-7203408126421659650-KRgK/) ([recording](https://www.youtube.com/watch?v=wfpaFQ7iZCs))
-- I have created [a series of video tutorials](https://www.youtube.com/@ozsvartkaroly) on C# programming on YouTube
-
-### 6. Other
-Some facts about me:
-- I am proficient in English language (I have certification for B2 level, but am around B2-C1 level both orally and in writing)
-- I attended some courses related to computer networks (CISCO CCNA, MTA networking fundamentals)
-- Most of my personal code is open source and public, [see them all here](https://gitlab.com/users/arphox/groups)
-- I regularly read professional literature and watch conference presentations to extend my knowledge (I attended the Craft conference in 2019, 2024 and 2025)
-- I love: video games 🎮, books 📖, playing the piano 🎹, learning about various stuff 📖
+Piano 🎹 · books 📖 · video games 🎮 · continuous learning.
