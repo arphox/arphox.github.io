@@ -22,7 +22,12 @@ permalink: /cv/
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid #e8e8e8;
+    animation: cv-fade-in 0.3s ease;
   }
+  /* Hidden until the CV loads — nothing to print or download before then.
+     Revealed by removing this class, which triggers the fade-in above. */
+  #cv-toolbar.cv-hidden { display: none; }
+  @keyframes cv-fade-in { from { opacity: 0; } to { opacity: 1; } }
   .cv-toolbar-buttons { display: flex; flex-wrap: wrap; gap: 0.5rem; }
   #cv-toolbar button {
     font: inherit;
@@ -44,8 +49,44 @@ permalink: /cv/
   .cv-print-hint { margin: 0; color: #595959; font-size: 0.9em; line-height: 1.5; }
 
   .cv-content { line-height: 1.6; }
-  .cv-status { color: #828282; font-style: italic; }
-  .cv-error { color: #a00; }
+  .cv-status { color: #828282; font-style: italic; margin-bottom: 0.75rem; }
+
+  /* Slim indeterminate progress bar — signals background activity while the
+     CV is fetched. Removed automatically when the content replaces it. */
+  .cv-progress {
+    max-width: 240px;
+    height: 3px;
+    border-radius: 3px;
+    background: #e8e8e8;
+    overflow: hidden;
+  }
+  .cv-progress-bar {
+    width: 40%;
+    height: 100%;
+    border-radius: 3px;
+    background: #2a7ae2;
+    animation: cv-indeterminate 1.2s ease-in-out infinite;
+  }
+  @keyframes cv-indeterminate {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(250%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cv-progress-bar { animation: none; width: 100%; opacity: 0.6; }
+  }
+
+  /* Error state — a distinct "status" box, not just red text. */
+  .cv-error-box {
+    padding: 1rem 1.25rem;
+    border: 1px solid #f0c8c8;
+    border-radius: 6px;
+    background: #fdf4f4;
+  }
+  .cv-error-box p { margin: 0.4rem 0 0; }
+  .cv-error-box p:first-child { margin-top: 0; }
+  .cv-error-title { font-weight: 600; color: #a00; }
+  .cv-error-title::before { content: "⚠️ "; }
+  .cv-error-box .cv-error-detail { margin-top: 0.6rem; color: #999; font-size: 0.8em; }
 
   .cv-footer-sep { margin-top: 2.5rem; border: 0; border-top: 1px solid #e8e8e8; }
   .cv-source { color: #828282; font-size: 0.9em; }
@@ -66,7 +107,7 @@ permalink: /cv/
   }
 </style>
 
-<div id="cv-toolbar">
+<div id="cv-toolbar" class="cv-hidden">
   <div class="cv-toolbar-buttons">
     <button type="button" id="cv-print">🖨️ Save as PDF</button>
     <button type="button" id="cv-download-md" disabled>⬇️ Download Markdown</button>
@@ -79,6 +120,7 @@ permalink: /cv/
 
 <article id="cv-content" class="cv-content" aria-live="polite" aria-busy="true">
   <p class="cv-status">Loading CV from GitLab…</p>
+  <div class="cv-progress" aria-hidden="true"><div class="cv-progress-bar"></div></div>
 </article>
 
 <hr class="cv-footer-sep">
@@ -104,6 +146,7 @@ permalink: /cv/
     var GITLAB_UI = 'https://gitlab.com/arphox/cv/-/blob/master/README.md';
     var TIMEOUT_MS = 15000;
     var content = document.getElementById('cv-content');
+    var toolbar = document.getElementById('cv-toolbar');
     var downloadBtn = document.getElementById('cv-download-md');
     var cvMarkdown = null; // set once the fetch succeeds; gates the download button
 
@@ -137,14 +180,28 @@ permalink: /cv/
     function fail(message) {
       content.setAttribute('aria-busy', 'false');
       content.textContent = '';
-      var p1 = document.createElement('p');
-      p1.className = 'cv-error';
-      p1.textContent = 'Couldn\'t load the CV dynamically (' + message + ').';
-      var p2 = document.createElement('p');
-      // GITLAB_UI is a trusted constant; the dynamic `message` above is set via textContent.
-      p2.innerHTML = 'You can read it directly on <a href="' + GITLAB_UI + '">GitLab</a>.';
-      content.appendChild(p1);
-      content.appendChild(p2);
+
+      var box = document.createElement('div');
+      box.className = 'cv-error-box';
+
+      var title = document.createElement('p');
+      title.className = 'cv-error-title';
+      title.textContent = 'Couldn’t load the CV';
+
+      var body = document.createElement('p');
+      body.className = 'cv-error-body';
+      // GITLAB_UI is a trusted constant; the dynamic `message` below is set via textContent.
+      body.innerHTML = 'You can read it directly on ' +
+        '<a href="' + GITLAB_UI + '" target="_blank" rel="noopener">GitLab ↗</a>.';
+
+      var detail = document.createElement('p');
+      detail.className = 'cv-error-detail';
+      detail.textContent = 'Details: ' + message;
+
+      box.appendChild(title);
+      box.appendChild(body);
+      box.appendChild(detail);
+      content.appendChild(box);
     }
 
     if (typeof marked === 'undefined' || typeof DOMPurify === 'undefined') {
@@ -168,6 +225,8 @@ permalink: /cv/
         // Raw source is now available — enable the Markdown download.
         cvMarkdown = markdown;
         downloadBtn.disabled = false;
+        // Reveal the toolbar now that there's something to print/download.
+        toolbar.classList.remove('cv-hidden');
       })
       .catch(function (err) {
         fail((err && err.name === 'AbortError') ? 'timed out' : String((err && err.message) || err));
