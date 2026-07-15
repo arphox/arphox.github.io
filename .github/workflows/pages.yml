@@ -37,6 +37,47 @@ jobs:
         env:
           JEKYLL_ENV: production
 
+      # Generate the downloadable CV PDF by printing the just-built /cv/ page with
+      # headless Chrome. The PDF lands in the built site (_site) and ships with the
+      # deploy artifact — it is never committed to the repo, so it can't drift from cv.md.
+      - name: Generate CV PDF
+        run: |
+          set -euo pipefail
+          # Resolve a Chromium-family browser (ubuntu-latest ships google-chrome,
+          # but don't hard-code the name — fail loudly with a clear message if absent).
+          CHROME="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium-browser || command -v chromium || true)"
+          if [ -z "$CHROME" ]; then
+            echo "::error::No Chrome/Chromium found on PATH; cannot generate the CV PDF." >&2
+            exit 1
+          fi
+          "$CHROME" --version
+          # Serve the built site so root-absolute asset URLs (/assets/main.css, …) resolve.
+          ruby -run -e httpd -- _site -p 4000 &>/dev/null &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          # Wait for the server to answer on /cv/.
+          for i in $(seq 1 30); do
+            if curl -sSf -o /dev/null "http://127.0.0.1:4000/cv/"; then break; fi
+            sleep 0.5
+          done
+          "$CHROME" \
+            --headless=new \
+            --disable-gpu \
+            --no-sandbox \
+            --no-first-run \
+            --no-proxy-server \
+            --user-data-dir="$(mktemp -d)" \
+            --no-pdf-header-footer \
+            --print-to-pdf="_site/assets/cv.pdf" \
+            "http://127.0.0.1:4000/cv/"
+          # Validate: a non-empty, real PDF whose extracted text is actually the
+          # CV (not a blank/error page) — guards against silently shipping a
+          # structurally-valid-but-wrong PDF.
+          test -s _site/assets/cv.pdf
+          head -c 5 _site/assets/cv.pdf | grep -q '%PDF-'
+          sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+          pdftotext _site/assets/cv.pdf - | grep -q 'quality-oriented'
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 

@@ -5,9 +5,16 @@ permalink: /cv/
 ---
 
 {%- comment -%}
-  This page renders my CV dynamically in the browser by fetching the Markdown
-  source straight from GitLab (nothing is copied into this repo). See /README
-  or the commit history for details.
+  The CV is rendered at build time from its Markdown source in this repo
+  (assets/cv.md) — no runtime fetching, no client-side Markdown library.
+
+  Downloads:
+    - PDF: generated during the GitHub Pages build by printing this very page
+      with headless Chrome (see .github/workflows/pages.yml). Not committed to
+      the repo; produced fresh on every deploy.
+    - Markdown: the raw assets/cv.md, served verbatim.
+
+  See README.md for the source-of-truth / publish workflow.
 {%- endcomment -%}
 
 <style>
@@ -22,215 +29,70 @@ permalink: /cv/
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid #e8e8e8;
-    animation: cv-fade-in 0.3s ease;
   }
-  /* Hidden until the CV loads — nothing to print or download before then.
-     Revealed by removing this class, which triggers the fade-in above. */
-  #cv-toolbar.cv-hidden { display: none; }
-  @keyframes cv-fade-in { from { opacity: 0; } to { opacity: 1; } }
   .cv-toolbar-buttons { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  #cv-toolbar button {
+
+  /* Buttons are plain links styled as buttons — no JS needed.
+     Scoped under #cv-toolbar (ID) and covering every link state, so minima's
+     theme link colors (which target `a` / `a:visited` inside page content and
+     would otherwise tint the button text blue/purple) can't win. */
+  #cv-toolbar .cv-btn,
+  #cv-toolbar .cv-btn:visited,
+  #cv-toolbar .cv-btn:hover,
+  #cv-toolbar .cv-btn:focus,
+  #cv-toolbar .cv-btn:active {
+    color: #fff;
+    text-decoration: none;
+  }
+  #cv-toolbar .cv-btn {
+    display: inline-block;
     font: inherit;
-    cursor: pointer;
+    line-height: 1.2;
     padding: 0.5rem 1rem;
     border: 1px solid #2a7ae2;
     border-radius: 5px;
     background: #2a7ae2;
-    color: #fff;
   }
-  #cv-toolbar button:not(:disabled):hover { background: #1756a9; border-color: #1756a9; }
+  #cv-toolbar .cv-btn:hover,
+  #cv-toolbar .cv-btn:focus { background: #1756a9; border-color: #1756a9; }
 
-  /* Secondary "Download Markdown" button — amber, to stand apart from the blue primary.
-     Selectors need the #cv-toolbar prefix so they outrank `#cv-toolbar button` on specificity. */
-  #cv-toolbar #cv-download-md { background: #d9540b; border-color: #d9540b; }
-  #cv-toolbar #cv-download-md:not(:disabled):hover { background: #b3440a; border-color: #b3440a; }
-  #cv-toolbar #cv-download-md:disabled { cursor: not-allowed; opacity: 0.5; }
-
-  .cv-print-hint { margin: 0; color: #595959; font-size: 0.9em; line-height: 1.5; }
+  /* Secondary "Download Markdown" button — amber, to stand apart from the blue primary. */
+  #cv-toolbar .cv-btn-secondary { background: #d9540b; border-color: #d9540b; }
+  #cv-toolbar .cv-btn-secondary:hover,
+  #cv-toolbar .cv-btn-secondary:focus { background: #b3440a; border-color: #b3440a; }
 
   .cv-content { line-height: 1.6; }
-  .cv-status { color: #828282; font-style: italic; margin-bottom: 0.75rem; }
 
-  /* Slim indeterminate progress bar — signals background activity while the
-     CV is fetched. Removed automatically when the content replaces it. */
-  .cv-progress {
-    max-width: 240px;
-    height: 3px;
-    border-radius: 3px;
-    background: #e8e8e8;
-    overflow: hidden;
-  }
-  .cv-progress-bar {
-    width: 40%;
-    height: 100%;
-    border-radius: 3px;
-    background: #2a7ae2;
-    animation: cv-indeterminate 1.2s ease-in-out infinite;
-  }
-  @keyframes cv-indeterminate {
-    0%   { transform: translateX(-100%); }
-    100% { transform: translateX(250%); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .cv-progress-bar { animation: none; width: 100%; opacity: 0.6; }
-  }
-
-  /* Error state — a distinct "status" box, not just red text. */
-  .cv-error-box {
-    padding: 1rem 1.25rem;
-    border: 1px solid #f0c8c8;
-    border-radius: 6px;
-    background: #fdf4f4;
-  }
-  .cv-error-box p { margin: 0.4rem 0 0; }
-  .cv-error-box p:first-child { margin-top: 0; }
-  .cv-error-title { font-weight: 600; color: #a00; }
-  .cv-error-title::before { content: "⚠️ "; }
-  .cv-error-box .cv-error-detail { margin-top: 0.6rem; color: #999; font-size: 0.8em; }
-
-  .cv-footer-sep { margin-top: 2.5rem; border: 0; border-top: 1px solid #e8e8e8; }
-  .cv-source { color: #828282; font-size: 0.9em; }
-
-  /* Print / Save-as-PDF: strip everything except the CV itself */
+  /* Print / PDF generation: strip everything except the CV itself.
+     These rules also shape the downloadable PDF, which is produced by printing
+     this page with headless Chrome during the build. */
   @media print {
     @page { margin: 1.5cm; }
     .site-header,
     .site-footer,
-    #cv-toolbar,
-    .cv-footer-sep,
-    .cv-source { display: none !important; }
+    #cv-toolbar { display: none !important; }
     .page-content { padding: 0 !important; }
     .wrapper { max-width: none !important; margin: 0 !important; padding: 0 !important; }
     .cv-content { line-height: 1.45; font-size: 10.5pt; }
-    /* Keep links identifiable on paper; they also stay clickable in Save-as-PDF */
+    /* Keep links identifiable on paper; they also stay clickable in the PDF */
     .cv-content a { color: #000; text-decoration: underline; }
   }
 </style>
 
-<div id="cv-toolbar" class="cv-hidden">
+<div id="cv-toolbar">
   <div class="cv-toolbar-buttons">
-    <button type="button" id="cv-print">🖨️ Save as PDF</button>
-    <button type="button" id="cv-download-md" disabled>⬇️ Download Markdown</button>
+    <a class="cv-btn" href="{{ '/assets/cv.pdf' | relative_url }}" download="Karoly-Ozsvart-CV.pdf">⬇️ Download PDF</a>
+    <a class="cv-btn cv-btn-secondary" href="{{ '/assets/cv.md' | relative_url }}" download="Karoly-Ozsvart-CV.md">⬇️ Download Markdown</a>
   </div>
-  <p class="cv-print-hint">
-    <strong>PDF:</strong> opens your browser’s print dialog — choose “Save as PDF”.<br>
-    <strong>Markdown:</strong> the raw source, ideal for AI tools or plain-text use.
-  </p>
 </div>
 
-<article id="cv-content" class="cv-content" aria-live="polite" aria-busy="true">
-  <p class="cv-status">Loading CV from GitLab…</p>
-  <div class="cv-progress" aria-hidden="true"><div class="cv-progress-bar"></div></div>
+<article class="cv-content">
+  {%- comment -%}
+    include_relative runs Liquid on cv.md, so literal Liquid tag/output
+    delimiters (double-curly or curly-percent) in the CV prose would break the
+    build; escape them with a raw block if ever needed. The raw Markdown
+    download is a verbatim static copy and is unaffected either way.
+  {%- endcomment -%}
+  {%- capture cv_md -%}{%- include_relative assets/cv.md -%}{%- endcapture -%}
+  {{ cv_md | markdownify }}
 </article>
-
-<hr class="cv-footer-sep">
-<p class="cv-source">
-  This CV is rendered live from its Markdown source —
-  <a href="https://gitlab.com/arphox/cv/-/blob/master/README.md" target="_blank" rel="noopener">view the source on GitLab ↗</a>.
-</p>
-
-<script
-  src="https://cdnjs.cloudflare.com/ajax/libs/marked/16.3.0/lib/marked.umd.min.js"
-  integrity="sha512-V6rGY7jjOEUc7q5Ews8mMlretz1Vn2wLdMW/qgABLWunzsLfluM0FwHuGjGQ1lc8jO5vGpGIGFE+rTzB+63HdA=="
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"></script>
-<script
-  src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.4.8/purify.min.js"
-  integrity="sha512-JfRHuuInas3e80YgJBTb6JfrK4ngt4FRR9utxm7RbiuRVRNBdPORorA/WTgRKFCK7nbo+9ANMcEOVznsYvi3+A=="
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"></script>
-<script>
-  (function () {
-    // CORS-enabled GitLab API endpoint (the /-/raw/ path does NOT send CORS headers)
-    var SOURCE = 'https://gitlab.com/api/v4/projects/arphox%2Fcv/repository/files/README.md/raw?ref=master';
-    var GITLAB_UI = 'https://gitlab.com/arphox/cv/-/blob/master/README.md';
-    var TIMEOUT_MS = 15000;
-    var content = document.getElementById('cv-content');
-    var toolbar = document.getElementById('cv-toolbar');
-    var downloadBtn = document.getElementById('cv-download-md');
-    var cvMarkdown = null; // set once the fetch succeeds; gates the download button
-
-    // Wire the print button unconditionally, before any early return below.
-    document.getElementById('cv-print').addEventListener('click', function () {
-      window.print();
-    });
-
-    function pad(n) { return (n < 10 ? '0' : '') + n; }
-
-    // Karoly-Ozsvart-CV-YYYY-MM-DD_HH-mm.md (local time — reflects when the live copy was pulled)
-    function downloadFilename() {
-      var d = new Date();
-      return 'Karoly-Ozsvart-CV-' + d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' +
-        pad(d.getDate()) + '_' + pad(d.getHours()) + '-' + pad(d.getMinutes()) + '.md';
-    }
-
-    downloadBtn.addEventListener('click', function () {
-      if (cvMarkdown === null) { return; } // button is disabled until content loads, but guard anyway
-      var blob = new Blob([cvMarkdown], { type: 'text/markdown;charset=utf-8' });
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement('a');
-      a.href = url;
-      a.download = downloadFilename();
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    });
-
-    function fail(message) {
-      content.setAttribute('aria-busy', 'false');
-      content.textContent = '';
-
-      var box = document.createElement('div');
-      box.className = 'cv-error-box';
-
-      var title = document.createElement('p');
-      title.className = 'cv-error-title';
-      title.textContent = 'Couldn’t load the CV';
-
-      var body = document.createElement('p');
-      body.className = 'cv-error-body';
-      // GITLAB_UI is a trusted constant; the dynamic `message` below is set via textContent.
-      body.innerHTML = 'You can read it directly on ' +
-        '<a href="' + GITLAB_UI + '" target="_blank" rel="noopener">GitLab ↗</a>.';
-
-      var detail = document.createElement('p');
-      detail.className = 'cv-error-detail';
-      detail.textContent = 'Details: ' + message;
-
-      box.appendChild(title);
-      box.appendChild(body);
-      box.appendChild(detail);
-      content.appendChild(box);
-    }
-
-    if (typeof marked === 'undefined' || typeof DOMPurify === 'undefined') {
-      fail('required libraries failed to load');
-      return;
-    }
-
-    var controller = new AbortController();
-    var timer = setTimeout(function () { controller.abort(); }, TIMEOUT_MS);
-
-    fetch(SOURCE, { cache: 'no-store', signal: controller.signal })
-      .then(function (res) {
-        if (!res.ok) { throw new Error('HTTP ' + res.status); }
-        return res.text();
-      })
-      .then(function (markdown) {
-        var dirty = marked.parse(markdown, { gfm: true });
-        content.innerHTML = DOMPurify.sanitize(dirty, { USE_PROFILES: { html: true } });
-        content.setAttribute('aria-busy', 'false');
-        document.title = 'CV — Károly Ozsvárt';
-        // Raw source is now available — enable the Markdown download.
-        cvMarkdown = markdown;
-        downloadBtn.disabled = false;
-        // Reveal the toolbar now that there's something to print/download.
-        toolbar.classList.remove('cv-hidden');
-      })
-      .catch(function (err) {
-        fail((err && err.name === 'AbortError') ? 'timed out' : String((err && err.message) || err));
-      })
-      .then(function () { clearTimeout(timer); });
-  })();
-</script>
