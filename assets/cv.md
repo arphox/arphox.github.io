@@ -19,7 +19,8 @@ C# / .NET backend engineer since 2017, currently **Staff Engineer / Team Archite
 - **DevOps:** basics of CI/CD, Docker, Terraform
 - **Data & storage:** NoSQL-first: DynamoDB (current), Cosmos DB (prior); object storage (S3, Blob); SQS. Earlier MSSQL (+ EF)
 - **Testing & quality:** xUnit / TUnit / NUnit / MSTest, Moq / NSubstitute, FluentAssertions, BenchmarkDotNet, Roslyn analyzers
-- **Ways of working:** maintainability, automated quality checking, clean code, SOLID, TDD, code review, technical leadership, mentoring & knowledge-sharing
+- **Ways of working:** maintainability, automated quality checking, code review, TDD, clean code, SOLID/CUPID
+- **Leadership:** technical leadership, mentoring & knowledge-sharing, work breakdown & backlog management (Jira), prioritization & estimation, cross-team alignment
 - **AI-assisted development:** daily driver — Claude Code, Cursor, GitHub Copilot
 - **Tooling:** Rider, Visual Studio, Git, Postman, dotTrace / dotMemory
 
@@ -31,6 +32,7 @@ _AI-enhanced, video-based e-learning platform · C# .NET microservices_
 **Staff Engineer (.NET)** · 2024-08 – Present
 - Provide technical leadership for the platform backend on a microservices architecture (AWS: Lambda, ECS/Fargate, DynamoDB, S3; Terraform; C# .NET) — architectural guidance, mentoring, and hands-on delivery.
 - From 2025-03 to 2026-06, also led the backend-heavy **platform team** (4 engineers) as **Technical Lead / Team Architect**, owning the long-term maintainability, stability and scalability of ~30 backend services — until the backend sub-teams merged back into a single team.
+- Break down product goals into well-scoped, estimated backlog items and manage the team's backlog through delivery (Jira).
 - Set the team's quality bar with a build-enforced baseline (analyzers, warnings-as-errors, formatting, Git hooks) so violations are caught mechanically and code review can focus on design — keeping technical debt in check as the team grows.
 - Drive engineering culture beyond my own team: **founded and run** an internal engineering **book club** (since 2024-08, 4+ books) and **organize a company-wide backend guild** (since 2023-12) that aligns backend practices across teams.
 - Contributed to cost-optimization work that cut the platform's AWS bill by ~$3,000/month.
