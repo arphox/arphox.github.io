@@ -48,6 +48,10 @@ from its Markdown source — no runtime fetching, no client-side rendering.
 > `{{ }}` / `{% %}` in the CV text (or escape them). The raw Markdown download
 > is a verbatim copy and is unaffected.
 
+## The rental-search page (`/lakaskereses/`)
+
+The standalone Hungarian rental-search page lives in [`lakaskereses/`](lakaskereses/), with its own styles, theme script and local assets. It deliberately stays out of the main site's navigation. Its HTML has no Jekyll front matter, so it is published as a static file without the blog layout.
+
 ## Deployment
 
 Every push to `master` is built and deployed automatically by the
