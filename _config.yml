@@ -9,10 +9,20 @@
 # Site settings
 title: Károly Ozsvárt
 description: >- # this means to ignore newlines until "baseurl:"
-  All about IT and programming
+  Personal notes on software engineering and beyond, plus useful browser tools.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://arphox.github.io" # the base hostname & protocol for your site
 github_username: arphox
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      image:
+        path: /assets/social-card.jpg
+        width: 1200
+        height: 630
+        alt: "Károly Ozsvárt — personal notes and browser tools"
 
 header_pages:
   - local-tools/index.html

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#191b20"/>
+  <rect x="88" y="84" width="176" height="176" rx="39" fill="#23262d"/>
+  <g transform="translate(88 84) scale(2.75)" fill="none" stroke="#8ab4f8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="12" y="19" width="16" height="26" rx="8"/>
+    <path d="M37 19v26m16-26L38 33l15 12"/>
+  </g>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <text x="80" y="452" font-size="140" font-weight="600" letter-spacing="-4" fill="#e4e6eb">Károly Ozsvárt</text>
+  </g>
+</svg>

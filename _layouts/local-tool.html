@@ -8,6 +8,7 @@
     <title>{{ page.title | escape }} | {{ site.title | escape }}</title>
     <meta name="description" content="{{ page.description | escape }}">
     <link rel="canonical" href="{{ page.url | absolute_url }}">
+    {% include tool-social-meta.html %}
     <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
     <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/local-tools/tools.css' | relative_url }}">

@@ -14,6 +14,12 @@ Shared light/dark colors and syntax highlighting live in `_sass/_theme.scss`;
 tool styles use the same color variables. Dark colors apply only to screens,
 so printing (including the generated CV PDF) keeps the light palette.
 
+Link previews use the shared static `assets/social-card.jpg` (1200 × 630), with
+`assets/social-card.svg` as its editable source. The image default in `_config.yml`
+is inherited by new posts and tools; their existing titles and descriptions supply
+the preview text. Local Tools use `tool-social-meta.html` without inline scripts
+to preserve their CSP. The standalone rental page keeps its own preview metadata.
+
 ## Running locally
 
 Requires Ruby (see [`.ruby-version`](.ruby-version)) and Bundler. CI reads the

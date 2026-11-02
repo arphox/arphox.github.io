@@ -2,6 +2,8 @@
 layout: post
 title:  "Mit együnk, mennyit igyunk? – podcast jegyzet"
 date:   2024-05-06 05:00:00 +0000
+lang: hu
+locale: hu_HU
 ---
 
 > A cikket ~10 perc elolvasni.
