@@ -10,6 +10,8 @@
     <link rel="canonical" href="{{ page.url | absolute_url }}">
     <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/local-tools/tools.css' | relative_url }}">
+    {% if page.tool_stylesheet %}<link rel="stylesheet" href="{{ page.tool_stylesheet | relative_url }}">{% endif %}
+    {% for script in page.tool_scripts %}<script src="{{ script | relative_url }}" defer></script>{% endfor %}
   </head>
   <body>
     <a class="local-tools-skip-link" href="#main-content">Skip to content</a>

@@ -17,9 +17,13 @@ Create `<tool-slug>/index.html` with `layout: local-tool`, `title`, `description
 and `permalink: /local-tools/<tool-slug>/` in its front matter. `subtitle` is optional.
 Use `relative_url` for local URLs, `tools.css` for shared styles, and separate
 script files with `defer`. No inline scripts, event handlers or styles.
+Optional `tool_stylesheet` and `tool_scripts` front matter load tool-specific
+assets through the shared layout; script order is preserved.
 
 Add a card to the collection. Only the collection belongs in the site's
 `header_pages` navigation, not individual tools.
+
+Keep each tool's documentation in its own `<tool-slug>/README.md`.
 
 ## External dependencies
 

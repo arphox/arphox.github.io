@@ -1,0 +1,57 @@
+---
+layout: local-tool
+title: QR Code Generator
+permalink: /local-tools/qr-generator/
+description: "Generate QR codes locally in your browser and download PNG or SVG files. No uploads or tracking."
+tool_stylesheet: /local-tools/qr-generator/qr-generator.css
+tool_scripts:
+  - /local-tools/qr-generator/vendor/qrcodegen.js
+  - /local-tools/qr-generator/qr-generator.js
+---
+
+<noscript><p>This tool needs JavaScript to generate QR codes locally. Nothing is sent to a server.</p></noscript>
+<p id="qr-loading" role="status">Loading the generator… If it does not appear, reload the page while online.</p>
+<div id="qr-tool" hidden>
+  <div class="qr-workspace">
+    <section class="qr-controls" aria-labelledby="qr-input-title">
+      <h2 id="qr-input-title"><label for="qr-text">Text or URL</label></h2>
+      <textarea id="qr-text" rows="5" maxlength="10000" placeholder="Paste a URL or type some text" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="qr-input-help"></textarea>
+      <p id="qr-input-help" class="qr-help">Updates as you type. Nothing is uploaded or saved by this tool.</p>
+      <div class="qr-fields">
+        <label for="qr-format">Output format
+          <select id="qr-format"><option value="png">PNG (bitmap)</option><option value="svg">SVG (vector)</option></select>
+        </label>
+        <label for="qr-ecc">Error correction
+          <select id="qr-ecc"><option value="LOW">Low (~7%)</option><option value="MEDIUM" selected>Medium (~15%)</option><option value="QUARTILE">Quartile (~25%)</option><option value="HIGH">High (~30%)</option></select>
+        </label>
+      </div>
+      <details class="qr-advanced">
+        <summary>Advanced settings</summary>
+        <div class="qr-fields">
+          <label for="qr-border">Border (modules)<input id="qr-border" type="number" min="0" max="100" value="4" required></label>
+          <label for="qr-scale" id="qr-scale-label">Scale (pixels per module)<input id="qr-scale" type="number" min="1" max="30" value="8" required></label>
+          <label for="qr-light">Light color<input id="qr-light" type="color" value="#ffffff"></label>
+          <label for="qr-dark">Dark color<input id="qr-dark" type="color" value="#000000"></label>
+          <label for="qr-version-min">Minimum version<input id="qr-version-min" type="number" min="1" max="40" value="1" required></label>
+          <label for="qr-version-max">Maximum version<input id="qr-version-max" type="number" min="1" max="40" value="40" required></label>
+          <label for="qr-mask">Mask pattern<select id="qr-mask"><option value="-1">Automatic</option><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option></select></label>
+        </div>
+        <label class="qr-checkbox" for="qr-boost"><input id="qr-boost" type="checkbox" checked> Boost error correction when it fits the same version</label>
+        <p class="qr-help">For reliable scanning, keep a border of at least 4 modules and dark modules on a light background. PNG exports are limited to 4096 × 4096 pixels.</p>
+      </details>
+      <button id="qr-clear" type="button">Clear text</button>
+    </section>
+    <section class="qr-result" aria-labelledby="qr-result-title">
+      <h2 id="qr-result-title">Your QR code</h2>
+      <p id="qr-empty">Enter text to generate a QR code.</p>
+      <p id="qr-error" role="alert" hidden></p>
+      <div id="qr-preview" role="img" aria-label="Generated QR code" hidden></div>
+      <p id="qr-statistics" class="qr-help" role="status"></p>
+      <a id="qr-download" class="qr-download" hidden>Download PNG</a>
+    </section>
+  </div>
+</div>
+<aside class="qr-about">
+  <p>Works offline after loading, including downloads. <a href="{{ '/local-tools/' | relative_url }}#privacy">Privacy and verification instructions</a>.</p>
+  <p>Powered by <a href="https://www.nayuki.io/page/qr-code-generator-library">Project Nayuki’s QR Code generator</a> (MIT license). <a href="{{ '/local-tools/qr-generator/vendor/qrcodegen.js' | relative_url }}">Library source and license</a> · <a href="https://github.com/arphox/arphox.github.io/tree/master/local-tools/qr-generator">Tool source</a></p>
+</aside>
