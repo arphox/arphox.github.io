@@ -16,7 +16,9 @@ so printing (including the generated CV PDF) keeps the light palette.
 
 ## Running locally
 
-Requires Ruby (see [`.ruby-version`](.ruby-version)) and Bundler.
+Requires Ruby (see [`.ruby-version`](.ruby-version)) and Bundler. CI reads the
+same Ruby version file. The committed `Gemfile.lock` includes Windows and Linux
+platforms so local development and deployment use the same gem versions.
 
 ```sh
 bundle install
@@ -71,4 +73,12 @@ Browser-only tools. See [`local-tools/README.md`](local-tools/README.md) for dev
 ## Deployment
 
 Every push to `master` is built and deployed automatically by the
-[GitHub Actions workflow](.github/workflows/pages.yml) with the latest Jekyll 4.x.
+[GitHub Actions workflow](.github/workflows/pages.yml) with the locked Jekyll version.
+
+## Updating dependencies
+
+Run `bundle update --all`, then `bundle exec jekyll build` and review changes to
+`Gemfile.lock`. If adding a deployment platform, use `bundle lock --add-platform`
+to keep the lockfile portable. GitHub Actions are pinned to release commit hashes;
+update the hash and version comment together after checking the upstream release.
+On Windows, use `ridk exec bundle update --all` when gems need native compilation.
