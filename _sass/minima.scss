@@ -1,0 +1,8 @@
+@charset "utf-8";
+
+// Minima 2.5.2 Sass sources, migrated to modules; see minima/LICENSE.txt.
+// Compare these local overrides with upstream when upgrading the theme.
+@forward "minima/settings";
+@use "minima/base";
+@use "minima/layout";
+@use "minima/syntax-highlighting";

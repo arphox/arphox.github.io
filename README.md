@@ -3,6 +3,12 @@
 My blog, built with [Jekyll](https://jekyllrb.com/) and the [minima](https://github.com/jekyll/minima) theme,
 hosted on GitHub Pages at <https://arphox.github.io>.
 
+The Sass files in [`_sass/`](_sass/) and [`assets/main.scss`](assets/main.scss)
+are local overrides of Minima 2.5.2: no newer official release fixed its Sass
+deprecations when they were migrated. They use modern Sass APIs while preserving
+the generated CSS. When upgrading Minima, check whether these overrides can be
+removed or need updating.
+
 ## Running locally
 
 Requires Ruby (see [`.ruby-version`](.ruby-version)) and Bundler.
