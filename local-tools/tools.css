@@ -1,0 +1,95 @@
+.local-tools-skip-link {
+  position: absolute;
+  top: -10rem;
+  left: 1rem;
+  z-index: 10;
+  padding: 0.75rem 1rem;
+  color: #fff;
+  background: #1756a9;
+}
+
+.local-tools-skip-link:focus {
+  top: 0.5rem;
+  color: #fff;
+}
+
+.local-tools a:focus-visible,
+.local-tools summary:focus-visible {
+  outline: 3px solid #1756a9;
+  outline-offset: 4px;
+}
+
+.local-tools-heading {
+  margin-bottom: 1.75rem;
+}
+
+.local-tools-heading h1 {
+  margin-bottom: 0.5rem;
+  font-size: 2.25rem;
+  letter-spacing: -1px;
+  line-height: 1.2;
+}
+
+.local-tools-heading p {
+  margin-bottom: 0;
+  color: #555;
+  font-size: 1.125rem;
+}
+
+.local-tools h2 {
+  font-size: 1.375rem;
+  line-height: 1.4;
+}
+
+.local-tools-privacy {
+  margin-top: 2rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.local-tools-privacy summary {
+  padding: 1rem 0;
+  color: #1756a9;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.local-tools-privacy-content {
+  padding: 1.25rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  overflow-wrap: anywhere;
+}
+
+.local-tools-privacy-content li {
+  margin-bottom: 0.5rem;
+}
+
+.local-tools-privacy-content > :last-child {
+  margin-bottom: 0;
+}
+
+.local-tools-empty {
+  padding: 1.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+}
+
+.local-tools-empty p:first-child {
+  margin-bottom: 0.5rem;
+}
+
+.local-tools-empty p:last-child {
+  margin-bottom: 0;
+  color: #555;
+}
+
+@media screen and (max-width: 600px) {
+  .local-tools-heading h1 {
+    font-size: 2rem;
+  }
+
+  .local-tools-empty,
+  .local-tools-privacy-content {
+    padding: 1rem;
+  }
+}
