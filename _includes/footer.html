@@ -1,0 +1,12 @@
+<footer class="site-footer h-card">
+  <div class="wrapper">
+    <div class="site-footer-inner">
+      <p class="site-footer-name p-name">{{ site.title | escape }}</p>
+      <nav class="site-footer-links" aria-label="Social links and feed">
+        <a href="https://github.com/{{ site.github_username | escape }}">GitHub</a>
+        <a href="https://www.linkedin.com/in/arphox/">LinkedIn</a>
+        <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+      </nav>
+    </div>
+  </div>
+</footer>

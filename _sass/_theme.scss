@@ -1,0 +1,95 @@
+// Screen-only dark mode keeps printed pages and the generated CV PDF light.
+:root {
+  color-scheme: light;
+  --background: #fafaf9;
+  --surface: #f0f1f3;
+  --text: #252830;
+  --muted: #606773;
+  --border: #d9dde3;
+  --control-border: #7c828d;
+  --link: #245fa8;
+  --link-visited: #65529b;
+  --accent: #245fa8;
+  --on-accent: #fff;
+  --error: #ac2838;
+  --code-comment: #606773;
+  --code-keyword: #7546a1;
+  --code-string: #326344;
+  --code-number: #985217;
+  --code-name: #245fa8;
+  --code-added: #deeee2;
+  --code-removed: #f7dfe3;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --background: #191b20;
+    --surface: #23262d;
+    --text: #e4e6eb;
+    --muted: #a6acb8;
+    --border: #3b414d;
+    --control-border: #767e8e;
+    --link: #8ab4f8;
+    --link-visited: #b9a4e8;
+    --accent: #8ab4f8;
+    --on-accent: #191b20;
+    --error: #ff9ba8;
+    --code-comment: #a6acb8;
+    --code-keyword: #c8a9f1;
+    --code-string: #a1d4ac;
+    --code-number: #edbd8b;
+    --code-name: #95c9ef;
+    --code-added: #263e31;
+    --code-removed: #492b34;
+  }
+}
+
+html { background: var(--background); }
+body { color: var(--text); background: var(--background); }
+a { color: var(--link); }
+a:visited { color: var(--link-visited); }
+a:hover { color: var(--text); }
+a:focus-visible, summary:focus-visible, button:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 4px;
+}
+::selection { color: var(--on-accent); background: var(--accent); }
+
+.site-header { border-top: 3px solid var(--border); border-bottom-color: var(--border); }
+.site-title, .site-title:visited, .site-nav .page-link { color: var(--text); }
+.site-nav .menu-icon > svg, .svg-icon { fill: var(--muted); }
+.site-footer { border-color: var(--border); padding: 24px 0; }
+.site-footer-inner { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 24px; }
+.site-footer-name { color: var(--muted); margin: 0; font-size: 0.875rem; }
+.site-footer-links { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 0.875rem; }
+.site-footer-links a, .site-footer-links a:visited { color: var(--muted); }
+.site-footer-links a:hover { color: var(--link); }
+.post-meta, blockquote { color: var(--muted); }
+blockquote { border-color: var(--border); letter-spacing: normal; }
+.post-content { line-height: 1.7; }
+.post-content h2, .post-content h3, .post-content h4 { line-height: 1.3; }
+hr { border: 0; border-top: 1px solid var(--border); }
+
+pre, code, .highlight, .highlighter-rouge .highlight {
+  color: var(--text);
+  background: var(--surface);
+  border-color: var(--border);
+}
+.highlight {
+  .c, .cm, .cp, .c1, .cs, .gh, .go, .gp, .gu, .nn, .bp, .w { color: var(--code-comment); }
+  .k, .kc, .kd, .kp, .kr, .kt, .ow { color: var(--code-keyword); }
+  .s, .sb, .sc, .sd, .s2, .se, .sh, .si, .sx, .sr, .s1, .ss { color: var(--code-string); }
+  .m, .mf, .mh, .mi, .mo, .il { color: var(--code-number); }
+  .na, .nb, .nc, .no, .ni, .ne, .nf, .nt, .nv, .vc, .vg, .vi { color: var(--code-name); }
+  .err, .gr, .gt { color: var(--error); background: transparent; }
+  .gd, .gd .x { color: var(--text); background: var(--code-removed); }
+  .gi, .gi .x { color: var(--text); background: var(--code-added); }
+}
+table { color: var(--text); border-color: var(--border); }
+table th, table td { border-color: var(--border); }
+table th, table tr:nth-child(even) { background: var(--surface); }
+
+@media screen and (max-width: 600px) {
+  .site-nav { background: var(--background); border-color: var(--border); }
+}

@@ -9,6 +9,11 @@ deprecations when they were migrated. They use modern Sass APIs while preserving
 the generated CSS. When upgrading Minima, check whether these overrides can be
 removed or need updating.
 
+The blog, CV and Local Tools follow the OS color preference using CSS only.
+Shared light/dark colors and syntax highlighting live in `_sass/_theme.scss`;
+tool styles use the same color variables. Dark colors apply only to screens,
+so printing (including the generated CV PDF) keeps the light palette.
+
 ## Running locally
 
 Requires Ruby (see [`.ruby-version`](.ruby-version)) and Bundler.

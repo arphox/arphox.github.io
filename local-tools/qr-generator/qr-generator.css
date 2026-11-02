@@ -15,44 +15,44 @@
   min-height: 2.75rem;
   margin-top: 0.35rem;
   padding: 0.5rem;
-  border: 1px solid #999;
+  border: 1px solid var(--control-border);
   border-radius: 4px;
-  color: #222;
-  background: #fff;
+  color: var(--text);
+  background: var(--background);
   font: inherit;
   font-weight: 400;
 }
 .qr-controls textarea { resize: vertical; }
 .qr-controls input[type="color"] { padding: 0.25rem; cursor: pointer; }
 .qr-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-.qr-help { margin-top: 0.65rem; color: #555; font-size: 0.875rem; overflow-wrap: anywhere; }
+.qr-help { margin-top: 0.65rem; color: var(--muted); font-size: 0.875rem; overflow-wrap: anywhere; }
 .qr-advanced { margin: 1.25rem 0; }
-.qr-advanced summary { padding: 0.5rem 0; color: #1756a9; cursor: pointer; font-weight: 600; }
+.qr-advanced summary { padding: 0.5rem 0; color: var(--accent); cursor: pointer; font-weight: 600; }
 .qr-advanced .qr-fields { margin-top: 0.75rem; }
 .qr-checkbox { margin-top: 1rem; }
 .qr-checkbox input { margin-right: 0.35rem; }
-.qr-result { padding: 1.25rem; border: 1px solid #e0e0e0; border-radius: 6px; }
+.qr-result { padding: 1.25rem; border: 1px solid var(--border); border-radius: 6px; }
 #qr-preview { background: #fff; }
 #qr-preview canvas, #qr-preview svg { display: block; max-width: 100%; height: auto; margin: auto; }
 #qr-preview canvas { image-rendering: pixelated; }
-#qr-error { color: #a01919; overflow-wrap: anywhere; }
+#qr-error { color: var(--error); overflow-wrap: anywhere; }
 .qr-download, .qr-download:visited, #qr-clear {
   display: inline-block;
   box-sizing: border-box;
   min-height: 2.75rem;
   padding: 0.65rem 1rem;
-  border: 1px solid #1756a9;
+  border: 1px solid var(--accent);
   border-radius: 4px;
-  color: #fff;
-  background: #1756a9;
+  color: var(--on-accent);
+  background: var(--accent);
   font: inherit;
   line-height: 1.4;
   cursor: pointer;
 }
-.qr-download:hover { color: #fff; background: #124786; text-decoration: none; }
-#qr-clear { color: #1756a9; background: #fff; }
-.qr-controls :focus-visible { outline: 3px solid #1756a9; outline-offset: 3px; }
-.qr-about { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e0e0e0; font-size: 0.875rem; }
+.qr-download:hover { color: var(--on-accent); background: var(--accent); text-decoration: none; }
+#qr-clear { color: var(--accent); background: var(--background); }
+.qr-controls :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.qr-about { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.875rem; }
 /* Preserve the hidden attribute even when a component sets display explicitly. */
 .local-tools [hidden] { display: none; }
 @media screen and (max-width: 700px) {

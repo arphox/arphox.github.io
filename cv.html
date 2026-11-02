@@ -29,7 +29,7 @@ description: "Károly Ozsvárt — Staff Software Engineer · C# .NET Backend ·
     gap: 0.75rem;
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #e8e8e8;
+    border-bottom: 1px solid var(--border);
   }
   .cv-toolbar-buttons { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
@@ -42,7 +42,7 @@ description: "Károly Ozsvárt — Staff Software Engineer · C# .NET Backend ·
   #cv-toolbar .cv-btn:hover,
   #cv-toolbar .cv-btn:focus,
   #cv-toolbar .cv-btn:active {
-    color: #fff;
+    color: var(--on-accent);
     text-decoration: none;
   }
   #cv-toolbar .cv-btn {
@@ -50,17 +50,22 @@ description: "Károly Ozsvárt — Staff Software Engineer · C# .NET Backend ·
     font: inherit;
     line-height: 1.2;
     padding: 0.5rem 1rem;
-    border: 1px solid #2a7ae2;
+    border: 1px solid var(--accent);
     border-radius: 5px;
-    background: #2a7ae2;
+    background: var(--accent);
   }
   #cv-toolbar .cv-btn:hover,
-  #cv-toolbar .cv-btn:focus { background: #1756a9; border-color: #1756a9; }
+  #cv-toolbar .cv-btn:focus { filter: brightness(0.9); }
 
-  /* Secondary "Download Markdown" button — amber, to stand apart from the blue primary. */
-  #cv-toolbar .cv-btn-secondary { background: #d9540b; border-color: #d9540b; }
+  #cv-toolbar .cv-btn-secondary,
+  #cv-toolbar .cv-btn-secondary:visited,
   #cv-toolbar .cv-btn-secondary:hover,
-  #cv-toolbar .cv-btn-secondary:focus { background: #b3440a; border-color: #b3440a; }
+  #cv-toolbar .cv-btn-secondary:focus,
+  #cv-toolbar .cv-btn-secondary:active {
+    color: var(--link);
+    background: transparent;
+    border-color: var(--border);
+  }
 
   .cv-content { line-height: 1.6; }
 
