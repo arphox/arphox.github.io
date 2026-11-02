@@ -9,11 +9,12 @@ Requires Ruby (see [`.ruby-version`](.ruby-version)) and Bundler.
 
 ```sh
 bundle install
-bundle exec jekyll serve --livereload
+bundle exec jekyll serve
 ```
 
-Then open <http://localhost:4000>. On Windows you can also just run
-[`_start_local_hosting.bat`](_start_local_hosting.bat).
+Then open <http://localhost:4000>. On Windows, run
+[`_start_local_hosting.bat`](_start_local_hosting.bat); it installs missing gems
+and RubyInstaller build tools when needed. Refresh the browser manually after changes.
 
 ## Writing a post
 
